@@ -5,9 +5,9 @@ import APOD from './apod.js';
 
 //Business Logic
 
-async function getAPOD() {
+async function getAPOD(date) {
   try {
-    const response = await APOD.getPic();
+    const response = await APOD.getPic(date);
     if (response instanceof Error){
       const errorMessage = `there was a problem with the API: ${response.message}`;
       throw new Error(errorMessage);
@@ -50,4 +50,13 @@ function printError(error) {
   document.getElementById("spacediv").innerText = error.message;
 }
 
-window.addEventListener("load", getAPOD);
+function handleFormSubmission(e) {
+  e.preventDefault();
+  let date = document.getElementById("picDate").value;
+  getAPOD(date);
+
+}
+
+window.addEventListener("load", function() {
+  document.querySelector("form").addEventListener("submit", handleFormSubmission) 
+})
