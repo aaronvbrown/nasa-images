@@ -37,6 +37,7 @@ async function getAPOD(date) {
 
 //UI Logic
 
+
 function appendPic(response) {
   let picDiv = document.getElementById('spacediv');
   let img = document.createElement('img');
@@ -58,5 +59,7 @@ function handleFormSubmission(e) {
 }
 
 window.addEventListener("load", function() {
+  let picDate = document.getElementById("picDate");
+  picDate.max = new Date().toISOString().split("T")[0];
   document.querySelector("form").addEventListener("submit", handleFormSubmission) 
 })
